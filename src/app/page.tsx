@@ -57,6 +57,7 @@ export default function Home() {
     loadDemoData,
     setFilters,
     selectUnit,
+    clearData,
   } = useAppState();
 
   const handleLoadDemo = () => {
@@ -427,18 +428,22 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <button
+              onClick={clearData}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              title="トップページに戻る"
+            >
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm">
                 <HeartPulse className="w-4 h-4 text-white" />
               </div>
-              <div>
+              <div className="text-left">
                 <h1 className="font-semibold text-gray-900 text-sm">Organization Vitality Grid</h1>
                 <p className="text-xs text-gray-500">組織バイタリティ・グリッド</p>
               </div>
-            </div>
+            </button>
             
             <button
-              onClick={() => window.location.reload()}
+              onClick={clearData}
               className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
             >
               新しいデータを読み込む
