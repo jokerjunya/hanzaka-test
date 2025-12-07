@@ -141,18 +141,37 @@ export interface EngagementDetails {
 export interface StressDetails {
   仕事の量的負担: number | null;
   仕事の質的負担: number | null;
+  身体的負担度: number | null;
+  職場での対人関係: number | null;
+  職場環境: number | null;
   役割葛藤: number | null;
   情緒的負担: number | null;
+  ワークセルフバランス_ネガティブ: number | null;
+  仕事のコントロール: number | null;
+  仕事の適性: number | null;
+  技能の活用: number | null;
+  仕事の意義: number | null;
+  役割明確さ: number | null;
+  成長の機会: number | null;
   上司のサポート: number | null;
   同僚のサポート: number | null;
+  家族友人のサポート: number | null;
   上司のリーダーシップ: number | null;
+  上司の公正な態度: number | null;
   ほめてもらえる職場: number | null;
   失敗を認める職場: number | null;
+  経営層との信頼関係: number | null;
+  ワークエンゲイジメント: number | null;
+  職場の一体感: number | null;
   活気: number | null;
   イライラ感: number | null;
   疲労感: number | null;
   不安感: number | null;
   抑うつ感: number | null;
+  身体愁訴: number | null;
+  職場のハラスメント: number | null;
+  仕事満足度: number | null;
+  家庭満足度: number | null;
 }
 
 /** リスクレベル */

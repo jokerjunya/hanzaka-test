@@ -43,6 +43,7 @@ import { SummaryCards } from '@/components/dashboard/summary-cards';
 import { VitalityGrid } from '@/components/charts/vitality-grid';
 import { FilterBar } from '@/components/dashboard/filter-bar';
 import { UnitDetailPanel } from '@/components/dashboard/unit-detail-panel';
+import { CategoryComparison } from '@/components/charts/category-comparison';
 import { DEMO_DATA } from '@/lib/demo-data';
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
     error,
     filters,
     selectedUnit,
+    overallAverage,
     loadData,
     loadDemoData,
     setFilters,
@@ -478,13 +480,29 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="h-[560px] w-full">
+          <div className="h-[640px] w-full">
             <VitalityGrid
               units={filteredUnits}
               onUnitClick={selectUnit}
               selectedUnitId={selectedUnit?.id}
             />
           </div>
+        </section>
+
+        {/* カテゴリ別比較セクション */}
+        <section className="card p-6 mt-6">
+          <div className="mb-5">
+            <h2 className="text-lg font-semibold text-gray-900">セグメント別比較分析</h2>
+            <p className="text-sm text-gray-500 mt-0.5">
+              役職・雇用形態・拠点・年代ごとの傾向を比較
+            </p>
+          </div>
+          
+          <CategoryComparison 
+            units={units} 
+            overallAverage={overallAverage}
+            onUnitClick={selectUnit}
+          />
         </section>
       </main>
 
@@ -496,6 +514,7 @@ export default function Home() {
           />
           <UnitDetailPanel
             unit={selectedUnit}
+            benchmark={overallAverage}
             onClose={() => selectUnit(null)}
           />
         </>

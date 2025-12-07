@@ -20,6 +20,9 @@ interface AppState {
   filters: FilterConfig;
   selectedUnit: OrganizationUnit | null;
   
+  // Computed
+  overallAverage: OrganizationUnit | null;
+  
   // Actions
   loadData: (engagementFile: File, stressFile: File) => Promise<void>;
   loadDemoData: (demoUnits: OrganizationUnit[]) => void;
@@ -43,6 +46,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [filters, setFiltersState] = useState<FilterConfig>(defaultFilters);
   const [selectedUnit, setSelectedUnit] = useState<OrganizationUnit | null>(null);
+  const [overallAverage, setOverallAverage] = useState<OrganizationUnit | null>(null);
 
   const loadData = useCallback(async (engagementFile: File, stressFile: File) => {
     setIsLoading(true);
@@ -51,6 +55,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       const loadedUnits = await loadAndMergeCSVFiles(engagementFile, stressFile);
       setUnits(loadedUnits);
+      
+      // 全社平均を抽出
+      const overall = loadedUnits.find(u => u.category === '全体' && u.name.includes('全体'));
+      setOverallAverage(overall || null);
       
       const dashboardSummary = generateDashboardSummary(loadedUnits);
       setSummary(dashboardSummary);
@@ -63,6 +71,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const loadDemoData = useCallback((demoUnits: OrganizationUnit[]) => {
     setUnits(demoUnits);
+    
+    // 全社平均を抽出
+    const overall = demoUnits.find(u => u.category === '全体' && u.name.includes('全体'));
+    setOverallAverage(overall || null);
+    
     const dashboardSummary = generateDashboardSummary(demoUnits);
     setSummary(dashboardSummary);
     setError(null);
@@ -80,6 +93,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setUnits([]);
     setSummary(null);
     setSelectedUnit(null);
+    setOverallAverage(null);
     setError(null);
   }, []);
 
@@ -92,6 +106,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         error,
         filters,
         selectedUnit,
+        overallAverage,
         loadData,
         loadDemoData,
         setFilters,
