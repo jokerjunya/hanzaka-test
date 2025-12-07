@@ -155,7 +155,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
                 name="エンゲージメント"
                 fill="#3b82f6" 
                 radius={[4, 4, 0, 0]}
-                onClick={(data) => onUnitClick(data.unit)}
+                onClick={(data: { payload?: { unit?: OrganizationUnit } }) => data.payload?.unit && onUnitClick(data.payload.unit)}
                 cursor="pointer"
               />
               <Bar 
@@ -163,7 +163,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
                 name="ストレス反応"
                 fill="#f59e0b" 
                 radius={[4, 4, 0, 0]}
-                onClick={(data) => onUnitClick(data.unit)}
+                onClick={(data: { payload?: { unit?: OrganizationUnit } }) => data.payload?.unit && onUnitClick(data.payload.unit)}
                 cursor="pointer"
               />
             </BarChart>
@@ -194,7 +194,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
               <ReferenceLine y={avgStress} stroke="#94a3b8" strokeDasharray="4 4" />
               <Scatter 
                 data={scatterData} 
-                onClick={(data) => onUnitClick(data.unit)}
+                onClick={(data: { payload?: { unit?: OrganizationUnit } }) => data.payload?.unit && onUnitClick(data.payload.unit)}
                 cursor="pointer"
               >
                 {scatterData.map((entry, index) => (
