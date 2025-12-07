@@ -32,7 +32,8 @@ type DisplayMode = 'number' | 'label' | 'icon';
 export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGridProps) {
   const [displayMode, setDisplayMode] = useState<DisplayMode>('number');
   const [hoveredUnit, setHoveredUnit] = useState<OrganizationUnit | null>(null);
-  const [showList, setShowList] = useState(true);
+  // モバイルではデフォルトでリストを非表示
+  const [showList, setShowList] = useState(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // データの範囲を計算

@@ -480,7 +480,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="h-[450px] w-full overflow-hidden relative">
+          <div className="h-[350px] sm:h-[450px] w-full overflow-hidden relative">
             <VitalityGrid
               units={filteredUnits}
               onUnitClick={selectUnit}

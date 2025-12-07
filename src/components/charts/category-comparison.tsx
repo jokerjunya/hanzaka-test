@@ -73,13 +73,13 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
   return (
     <div className="space-y-4">
       {/* コントロール */}
-      <div className="flex items-center justify-between">
-        <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div className="flex gap-1 bg-gray-100 rounded-lg p-1 overflow-x-auto">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+              className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
                 selectedCategory === cat
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
@@ -90,10 +90,10 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
           ))}
         </div>
         
-        <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex gap-1 bg-gray-100 rounded-lg p-1 self-end sm:self-auto">
           <button
             onClick={() => setViewMode('bar')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
               viewMode === 'bar'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
@@ -103,7 +103,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
           </button>
           <button
             onClick={() => setViewMode('scatter')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
               viewMode === 'scatter'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
@@ -115,7 +115,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
       </div>
 
       {/* チャート */}
-      <div className="h-80">
+      <div className="h-64 sm:h-80">
         {viewMode === 'bar' ? (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -213,7 +213,7 @@ export function CategoryComparison({ units, overallAverage, onUnitClick }: Categ
       </div>
 
       {/* サマリーカード */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
         {categoryUnits.slice(0, 4).map((unit) => (
           <CategorySummaryCard 
             key={unit.id} 

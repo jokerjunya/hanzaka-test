@@ -45,13 +45,13 @@ export function FilterBar({ filters, onFilterChange, availableCategories }: Filt
   };
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-wrap items-center gap-3 sm:gap-6">
       <div className="flex items-center gap-2 text-sm text-gray-500">
         <Filter className="w-4 h-4" />
-        <span>表示切替</span>
+        <span className="hidden sm:inline">表示切替</span>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 -mb-1">
         {CATEGORY_OPTIONS.map((category) => {
           const isAvailable = availableCategories.includes(category);
           const isActive = filters.categories.includes(category);
@@ -62,7 +62,7 @@ export function FilterBar({ filters, onFilterChange, availableCategories }: Filt
               onClick={() => isAvailable && toggleCategory(category)}
               disabled={!isAvailable}
               className={`
-                inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap
                 ${!isAvailable 
                   ? 'bg-gray-50 text-gray-300 cursor-not-allowed' 
                   : isActive
@@ -72,18 +72,18 @@ export function FilterBar({ filters, onFilterChange, availableCategories }: Filt
               `}
             >
               {CATEGORY_ICONS[category]}
-              {category}
+              <span className="hidden xs:inline">{category}</span>
             </button>
           );
         })}
       </div>
 
-      <div className="w-px h-6 bg-gray-200" />
+      <div className="hidden sm:block w-px h-6 bg-gray-200" />
 
       <button
         onClick={toggleRiskOnly}
         className={`
-          inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+          inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap
           ${filters.showOnlyRisk
             ? 'bg-red-100 text-red-700'
             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -91,7 +91,7 @@ export function FilterBar({ filters, onFilterChange, availableCategories }: Filt
         `}
       >
         <AlertCircle className="w-3.5 h-3.5" />
-        要注意のみ
+        <span className="hidden sm:inline">要注意のみ</span>
       </button>
     </div>
   );

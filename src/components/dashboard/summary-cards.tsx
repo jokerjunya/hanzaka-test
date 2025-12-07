@@ -27,7 +27,7 @@ export function SummaryCards({ summary, onUnitClick }: SummaryCardsProps) {
   return (
     <div className="space-y-4">
       {/* メトリクスカード */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <MetricCard
           icon={<Users className="w-5 h-5" />}
           iconBg="bg-gray-100"
@@ -57,7 +57,7 @@ export function SummaryCards({ summary, onUnitClick }: SummaryCardsProps) {
       </div>
 
       {/* リスク・健全リスト */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
         {/* 要注意組織 */}
         <div className="card p-5">
           <div className="flex items-center gap-3 mb-4">
