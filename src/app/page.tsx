@@ -427,7 +427,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-pattern">
       {/* ヘッダー */}
-      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
             <button
@@ -470,7 +470,7 @@ export default function Home() {
           />
         </section>
 
-        <section className="card p-6">
+        <section className="card p-6 overflow-hidden relative isolate">
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-lg font-semibold text-gray-900">バイタリティマトリクス</h2>
@@ -480,7 +480,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="h-[640px] w-full">
+          <div className="h-[450px] w-full overflow-hidden relative">
             <VitalityGrid
               units={filteredUnits}
               onUnitClick={selectUnit}
@@ -490,7 +490,7 @@ export default function Home() {
         </section>
 
         {/* カテゴリ別比較セクション */}
-        <section className="card p-6 mt-6">
+        <section className="card p-6 mt-8 overflow-hidden relative isolate">
           <div className="mb-5">
             <h2 className="text-lg font-semibold text-gray-900">セグメント別比較分析</h2>
             <p className="text-sm text-gray-500 mt-0.5">
@@ -498,11 +498,13 @@ export default function Home() {
             </p>
           </div>
           
-          <CategoryComparison 
-            units={units} 
-            overallAverage={overallAverage}
-            onUnitClick={selectUnit}
-          />
+          <div className="overflow-hidden">
+            <CategoryComparison 
+              units={units} 
+              overallAverage={overallAverage}
+              onUnitClick={selectUnit}
+            />
+          </div>
         </section>
       </main>
 

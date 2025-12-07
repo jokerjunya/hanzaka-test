@@ -137,9 +137,9 @@ export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGri
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* コントロールバー（コンパクト） */}
-      <div className="flex items-center justify-between mb-2 px-1">
+      <div className="flex items-center justify-between mb-2 px-1 flex-shrink-0">
         <div className="flex items-center gap-4">
           <LegendItem color="bg-red-500" label="バーンアウト" icon={<Flame className="w-2.5 h-2.5" />} />
           <LegendItem color="bg-amber-500" label="低Eng" icon={<TrendingDown className="w-2.5 h-2.5" />} />
@@ -190,11 +190,11 @@ export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGri
       </div>
 
       {/* メインコンテンツ */}
-      <div className="flex-1 flex gap-4">
+      <div className="flex-1 flex gap-4 min-h-0 overflow-hidden">
         {/* グリッド */}
         <div 
           ref={gridRef}
-          className={`relative rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-white border border-gray-200 ${showList ? 'flex-1' : 'w-full'}`}
+          className={`relative rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-white border border-gray-200 min-h-0 ${showList ? 'flex-1' : 'w-full'}`}
         >
           {/* 背景の4象限 */}
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
@@ -259,10 +259,10 @@ export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGri
                     transition-all duration-200 cursor-pointer
                     ${getBubbleColor(unit.riskLevel)}
                     ${isSelected 
-                      ? 'ring-4 ring-blue-400 ring-offset-2 scale-110 z-30' 
+                      ? 'ring-4 ring-blue-400 ring-offset-2 scale-110 z-20' 
                       : isHovered
-                        ? 'scale-125 z-20 shadow-lg'
-                        : 'hover:scale-110 hover:z-10 shadow-sm hover:shadow-md'
+                        ? 'scale-125 z-10 shadow-lg'
+                        : 'hover:scale-110 hover:z-[5] shadow-sm hover:shadow-md'
                     }
                   `}
                   style={{
@@ -278,7 +278,7 @@ export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGri
                 {/* ホバー時のツールチップ */}
                 {isHovered && (
                   <div 
-                    className="absolute z-40 pointer-events-none"
+                    className="absolute z-30 pointer-events-none"
                     style={{
                       left: `${pos.x}%`,
                       top: `${pos.y}%`,
@@ -323,11 +323,11 @@ export function VitalityGrid({ units, onUnitClick, selectedUnitId }: VitalityGri
 
         {/* サイドリスト（コンパクト版） */}
         {showList && (
-          <div className="w-48 bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col">
-            <div className="px-2 py-1.5 bg-gray-50 border-b border-gray-200">
+          <div className="w-48 bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col min-h-0 flex-shrink-0">
+            <div className="px-2 py-1.5 bg-gray-50 border-b border-gray-200 flex-shrink-0">
               <h3 className="text-[10px] font-semibold text-gray-700">組織一覧（リスク順）</h3>
             </div>
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto min-h-0">
               {sortedUnits.map((unit) => {
                 const number = unitNumberMap.get(unit.id) ?? 0;
                 const isSelected = unit.id === selectedUnitId;
